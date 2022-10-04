@@ -1,0 +1,41 @@
+group 'com.zy.bmlocation'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+
+dependencies {
+    implementation 'com.baidu.lbsyun:BaiduMapSDK_Location_All:9.2.9'
+    // implementation fileTree(includes: ['*.jar'], dir: 'libs')
+    // implementation rootProject.findProject(":flutter_bmfbase")
+}
