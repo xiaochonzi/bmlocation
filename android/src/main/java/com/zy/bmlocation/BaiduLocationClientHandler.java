@@ -28,7 +28,6 @@ public class BaiduLocationClientHandler extends BDAbstractLocationListener {
         this.mEventSink = mEventSink;
         try {
             locationClient = new LocationClient(context);
-            locationClient.registerLocationListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +37,6 @@ public class BaiduLocationClientHandler extends BDAbstractLocationListener {
         if (null == locationClient) {
             try {
                 locationClient = new LocationClient(context);
-                locationClient.registerLocationListener(this);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -47,7 +45,22 @@ public class BaiduLocationClientHandler extends BDAbstractLocationListener {
             locationClient.setLocOption(clientOption);
         }
         Log.d(TAG, "startLocation");
+        locationClient.registerLocationListener(this);
         locationClient.start();
+    }
+
+    public void requestLocation(){
+        if(null==locationClient){
+            Log.d(TAG, "requestLocation");
+            locationClient.requestLocation();
+        }
+    }
+
+    public void restart(){
+        if(null==locationClient){
+            Log.d(TAG, "restart");
+            locationClient.restart();
+        }
     }
 
     public void updateOption(Map<String, Object> arguments) {
@@ -78,13 +91,4 @@ public class BaiduLocationClientHandler extends BDAbstractLocationListener {
         mEventSink.success(result);
     }
 
-    @Override
-    public void onReceiveLocString(String s) {
-        Log.e(TAG, "onReceiveLocString: 结果返回" + s);
-    }
-
-    @Override
-    public void onConnectHotSpotMessage(String s, int i) {
-        Log.e(TAG, "onConnectHotSpotMessage: 结果返回" + s + i);
-    }
 }

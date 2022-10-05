@@ -32,6 +32,13 @@ class BMFLocationResultMethodId {
   ///停止定位
   static const kLocationStopLocation =
       BMFLocationConstants.kLocationChannelName + '/stopLocation';
+
+  // 请求定位
+  static const kLocationRequestLocation =
+      BMFLocationConstants.kLocationChannelName + '/requestLocation';
+
+  static const kLocationRestart =
+      BMFLocationConstants.kLocationChannelName + '/restart';
 }
 
 ///仅支持iOS

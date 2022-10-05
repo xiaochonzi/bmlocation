@@ -13,7 +13,7 @@ class BaiduLocationAndroidOption extends BMFLocationBaseOption {
   /// 是否需要返回周边poi信息
   bool? isNeedLocationPoiList;
 
-  /// 是否需要返回新版本rgc信息
+  /// 设置是否需要最新版本的地址信息
   bool? isNeedNewVersionRgc;
 
   /// 是否需要返回位置描述信息
@@ -32,6 +32,18 @@ class BaiduLocationAndroidOption extends BMFLocationBaseOption {
 
   /// 可选，设置场景定位参数，包括签到场景、运动场景、出行场景
   BMFLocationPurpose? locationPurpose;
+
+  //可选，设置是否当卫星定位有效时按照1S/1次频率输出卫星定位结果，默认false
+  bool? locationNotify;
+
+  //设置是否在stop的时候杀死这个进程，默认（建议）不杀死
+  bool? ignoreKillProcess;
+
+  // 如果设置了该接口，首次启动定位时，会先判断当前Wi-Fi是否超出有效期，若超出有效期，会先重新扫描Wi-Fi，然后定位
+  int? wifiCacheTimeout;
+
+  //首次定位时可以选择定位的返回是准确性优先还是速度优先，默认为速度优先
+  FirstLocType? firstLocType;
 
   /// 可选，设置返回经纬度坐标类型，默认gcj02
   void setCoordType(BMFLocationCoordType coordType) {
@@ -85,18 +97,35 @@ class BaiduLocationAndroidOption extends BMFLocationBaseOption {
     this.locationPurpose = locationPurpose;
   }
 
+  void setLocationNotify(bool locationNotify){
+    this.locationNotify = locationNotify;
+  }
+
+  void setIgnoreKillProcess(bool isIgnoreKillProcess){
+    this.ignoreKillProcess = isIgnoreKillProcess;
+  }
+
+  void setWifiCacheTimeOut(int wifiCacheTimout){
+    this.wifiCacheTimeout = wifiCacheTimout;
+  }
+
+  void setFirstLocType(FirstLocType locType){
+    this.firstLocType = locType;
+  }
+
   /// 构造方法
   BaiduLocationAndroidOption({
     required BMFLocationCoordType coordType,
-    this.isNeedAddress,
-    this.isNeedAltitude,
-    this.isNeedLocationPoiList,
-    this.isNeedNewVersionRgc,
-    this.isNeedLocationDescribe,
-    this.openGps,
+    this.isNeedAddress = true,
+    this.isNeedAltitude = true,
+    this.isNeedLocationPoiList = false,
+    this.isNeedNewVersionRgc = true,
+    this.isNeedLocationDescribe = false,
+    this.openGps = true,
     this.scanspan = 0,
     this.locationMode = BMFLocationMode.hightAccuracy,
     this.locationPurpose = BMFLocationPurpose.other,
+    this.firstLocType = FirstLocType.speedInFirstLoc
   }) : super(coordType: coordType);
 
   /// 获取对本类所有变量赋值后的map键值对
@@ -112,6 +141,10 @@ class BaiduLocationAndroidOption extends BMFLocationBaseOption {
       "scanspan": scanspan,
       "locationMode": locationMode?.index,
       "locationPurpose": locationPurpose?.index,
+      "locationNotify": locationNotify,
+      "ignoreKillProcess": ignoreKillProcess,
+      "wifiCacheTimeout" : wifiCacheTimeout,
+      "firstLocType" : firstLocType?.index
     };
   }
 }
@@ -144,4 +177,11 @@ enum BMFLocationPurpose {
 
   ///其他类型
   other
+}
+//首次定位时可以选择定位的返回是准确性优先还是速度优先，默认为速度优先
+ enum FirstLocType {
+  // 速度优先，首次定位时会降低定位准确性，提升定位速度；
+  speedInFirstLoc,
+   // 准确性优先，首次定位时会降低速度，提升定位准确性
+  accuracyInFirstLoc;
 }

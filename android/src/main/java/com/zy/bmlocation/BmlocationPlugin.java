@@ -72,14 +72,12 @@ public class BmlocationPlugin implements FlutterPlugin, MethodCallHandler, Event
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
             case Constants.MethodID.LOCATION_SETAGREEPRIVACY: {
-                Log.d(TAG, "onMethodCall:LOCATION_SETAGREEPRIVACY");
                 boolean isAgreePrivacy = (Boolean) call.arguments;
                 LocationClient.setAgreePrivacy(isAgreePrivacy);
                 sendReturnResult(true, result);
             }
             break;
             case Constants.MethodID.LOCATION_SETOPTIONS: {
-                Log.d(TAG, "onMethodCall:LOCATION_SETOPTIONS");
                 Map<String, Object> argsMap = (Map<String, Object>) call.arguments;
                 BaiduLocationClientHandler handler = getHandler(argsMap);
                 handler.updateOption(argsMap);
@@ -87,7 +85,6 @@ public class BmlocationPlugin implements FlutterPlugin, MethodCallHandler, Event
             }
             break;
             case Constants.MethodID.LOCATION_STOPLOC: {
-                Log.d(TAG, "onMethodCall:LOCATION_STOPLOC");
                 Map<String, Object> argsMap = (Map<String, Object>) call.arguments;
                 BaiduLocationClientHandler handler = getHandler(argsMap);
                 handler.stopLocation();
@@ -98,19 +95,30 @@ public class BmlocationPlugin implements FlutterPlugin, MethodCallHandler, Event
             }
             break;
             case Constants.MethodID.LOCATION_STARTHEADING: {
-                Log.d(TAG, "onMethodCall:LOCATION_STARTHEADING");
                 sendReturnResult(true, result);
             }
             break;
             case Constants.MethodID.LOCATION_STOPHEADING: {
-                Log.d(TAG, "onMethodCall:LOCATION_STOPHEADING");
             }
             break;
             case Constants.MethodID.LOCATION_SERIESLOC: {
-                Log.d(TAG, "onMethodCall:LOCATION_SERIESLOC");
                 Map<String, Object> argsMap = (Map<String, Object>) call.arguments;
                 BaiduLocationClientHandler handler = getHandler(argsMap);
                 handler.startLocation();
+                sendReturnResult(true, result);
+            }
+            break;
+            case Constants.MethodID.REQUEST_LOCATION:{
+                Map<String, Object> argsMap = (Map<String, Object>) call.arguments;
+                BaiduLocationClientHandler handler = getHandler(argsMap);
+                handler.requestLocation();
+                sendReturnResult(true, result);
+            }
+            break;
+            case Constants.MethodID.RESTART:{
+                Map<String, Object> argsMap = (Map<String, Object>) call.arguments;
+                BaiduLocationClientHandler handler = getHandler(argsMap);
+                handler.restart();
                 sendReturnResult(true, result);
             }
             break;

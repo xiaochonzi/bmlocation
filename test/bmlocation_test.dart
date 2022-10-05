@@ -82,6 +82,18 @@ class MockBmlocationPlatform
     throw UnimplementedError();
   }
 
+  @override
+  Future<bool> requestLocation() {
+    // TODO: implement requestLocation
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> restart() {
+    // TODO: implement restart
+    throw UnimplementedError();
+  }
+
 }
 
 void main() {

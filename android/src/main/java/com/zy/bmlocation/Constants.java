@@ -41,5 +41,11 @@ public class Constants {
 
         public static final String LOCATION_STOPHEADING = MethodChannelName.LOCATION_CHANNEL +
                 "/stopUpdatingHeading";
+
+        public static final String REQUEST_LOCATION = MethodChannelName.LOCATION_CHANNEL +
+                "/requestLocation";
+
+        public static final String RESTART = MethodChannelName.LOCATION_CHANNEL +
+                "/restart";
     }
 }

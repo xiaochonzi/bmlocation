@@ -113,6 +113,32 @@ public class Common {
                 option.setNeedNewVersionRgc(false);
             }
         }
+        if (arguments.containsKey("locationNotify") && arguments.get("locationNotify")!=null){
+            if (((boolean) arguments.get("locationNotify"))) {
+                option.setLocationNotify(true);
+            } else {
+                option.setLocationNotify(false);
+            }
+        }
+        if (arguments.containsKey("ignoreKillProcess") && arguments.get("ignoreKillProcess")!=null){
+            if (((boolean) arguments.get("ignoreKillProcess"))) {
+                option.setIgnoreKillProcess(true);
+            } else {
+                option.setIgnoreKillProcess(false);
+            }
+        }
+        if (arguments.containsKey("wifiCacheTimeout") && arguments.get("wifiCacheTimeout")!=null){
+            option.setWifiCacheTimeOut((int) arguments.get("wifiCacheTimeout"));
+        }
+        if (arguments.containsKey("firstLocType") && arguments.get("firstLocType")!=null){
+            if (((int) arguments.get("firstLocType")) == 0) {
+                option.setFirstLocType(LocationClientOption.FirstLocType.SPEED_IN_FIRST_LOC);
+            } else if (((int) arguments.get("coordType")) == 1) {
+                option.setFirstLocType(LocationClientOption.FirstLocType.ACCURACY_IN_FIRST_LOC);
+            }  else {
+                option.setFirstLocType(LocationClientOption.FirstLocType.SPEED_IN_FIRST_LOC);
+            }
+        }
         option.setProdName("flutter");
         return option;
     }

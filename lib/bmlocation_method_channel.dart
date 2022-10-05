@@ -187,4 +187,30 @@ class MethodChannelBmlocation extends BmlocationPlatform {
     }
     return _receiveStream!.stream;
   }
+
+  @override
+  Future<bool> requestLocation() async {
+    bool result = false;
+    try {
+      Map map = (await channel.invokeMethod(
+      BMFLocationResultMethodId.kLocationStopLocation, {'pluginKey': _pluginKey}) as Map);
+    result = map['result'] as bool;
+    } on PlatformException catch (e) {
+    print(e.toString());
+    }
+    return result;
+  }
+
+  @override
+  Future<bool> restart() async {
+    bool result = false;
+    try {
+      Map map = (await channel.invokeMethod(
+      BMFLocationResultMethodId.kLocationStopLocation, {'pluginKey': _pluginKey}) as Map);
+    result = map['result'] as bool;
+    } on PlatformException catch (e) {
+    print(e.toString());
+    }
+    return result;
+  }
 }

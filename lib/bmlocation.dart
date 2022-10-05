@@ -28,17 +28,25 @@ class Bmlocation {
     return BmlocationPlatform.instance.prepareLoc(androidMap, iosMap);
   }
 
-  //开始连续定位
+  //开始定位
   Future<bool> startLocation() async {
     return BmlocationPlatform.instance.startLocation();
   }
 
-  //停止连续定位
+  Future<bool> requestLocation() async {
+    return BmlocationPlatform.instance.requestLocation();
+  }
+
+  Future<bool> restart() async {
+    return BmlocationPlatform.instance.restart();
+  }
+
+  //停止定位
   Future<bool> stopLocation() async {
     return BmlocationPlatform.instance.stopLocation();
   }
 
-  //单次定位
+  //单次定位（ios独有）
   Future<bool> singleLocation(Map arguments) async {
     return BmlocationPlatform.instance.singleLocation(arguments);
   }
@@ -58,11 +66,11 @@ class Bmlocation {
     return BmlocationPlatform.instance.stopUpdatingHeading();
   }
 
-  //设备朝向回调
+  //设备定位回调
   Stream<BaiduLocation> onLocationChanged() {
     return BmlocationPlatform.instance.onLocationChanged();
   }
-
+  //设备朝向回调
   Stream<BaiduHeading> onHeaderChanged() {
     return BmlocationPlatform.instance.onHeaderChanged();
   }

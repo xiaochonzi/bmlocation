@@ -50,4 +50,8 @@ abstract class BmlocationPlatform extends PlatformInterface {
   Stream<BaiduLocation> onLocationChanged();
 
   Stream<BaiduHeading> onHeaderChanged();
+
+  Future<bool> requestLocation();
+
+  Future<bool> restart();
 }
